@@ -16,9 +16,8 @@ jobs:
     - name: Export multiple notebooks (raw)
       run: |
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
-        ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
-        # <COMPLETAR>: ruta del notebook base en el workspace de origen (carpeta del proyecto dentro del Workspace)
-        NOTEBOOK_BASE="/Workspace/Users/amunoz.0790@outlook.com/<COMPLETAR_CARPETA_PROYECTO>/proceso"
+        ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}        
+        NOTEBOOK_BASE="/Workspace/Users/amunoz.0790@outlook.com/Proyecto_medallion_retail/proceso"
         NOTEBOOKS=("00PrepararAmbiente" "01IngestaProductos" "01IngestaVentas" "02Transform_Ventas_Productos" "03Transform_Gold_Ventas_Categoria_Mes" "03Transform_Gold_Ventas_Diarias_Tienda")
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
@@ -32,9 +31,8 @@ jobs:
     - name: Deploy notebooks to Destination Workspace (Produccion)
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
-        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        # <COMPLETAR>: ruta destino donde se importaran los notebooks en el workspace de produccion
-        DEST_BASE="<COMPLETAR_RUTA_DESTINO_PRODUCCION>"
+        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}        
+        DEST_BASE="/Workspace/Users/amunoz.0790@outlook.com/proyecto-retail"
         for file in notebooks_to_deploy/*.py; do
           name=$(basename "$file" .py)
           dest_path="$DEST_BASE/$name"
@@ -61,7 +59,6 @@ jobs:
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
         DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        # <COMPLETAR>: nombre definitivo del job/workflow de produccion (se usa este como sugerencia)
         WORKFLOW_NAME="WF_Medallion_Retail_Prod"
 
         echo "Verificando si existe el workflow: $WORKFLOW_NAME"
@@ -113,9 +110,8 @@ jobs:
     - name: Create Databricks Workflow (Produccion)
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
-        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        # <COMPLETAR>: debe coincidir con DEST_BASE del paso de despliegue
-        DEST_BASE="<COMPLETAR_RUTA_DESTINO_PRODUCCION>"
+        DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}        
+        DEST_BASE="/Workspace/Users/amunoz.0790@outlook.com/proyecto-retail"
         WORKFLOW_NAME="WF_Medallion_Retail_Prod"
         CLUSTER_ID="${{ env.CLUSTER_ID }}"
 
