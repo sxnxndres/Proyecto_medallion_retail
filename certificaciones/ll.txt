@@ -1,1 +1,0 @@
-Ya pude resolver el problema de sincronización
