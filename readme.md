@@ -188,4 +188,4 @@ Sobre las tablas Golden se construyó un dashboard en Power BI (`dashboard/Dashb
 
 ## Autor
 
-Proyecto desarrollado por **Nandres** como entregable del curso de Ingeniería de Datos con Azure Databricks de SmartData.
+Proyecto desarrollado por **André Muñoz** como entregable del curso de Ingeniería de Datos con Azure Databricks de SmartData.
